@@ -4,6 +4,7 @@
 - stringmanagement has different functions to modify and edit descriptions and words in pom objects.
 - dateparsing has functions for working with, modify, edit, load and plot dates of pom objects.
 - getData has different functions for obtaining certain quantities and values of the script
+- gsheet now updates tomatohistory file on a only spread sheet saved in my google account in drive.
 
 Ideas:
 - Date reports about:
@@ -17,3 +18,4 @@ Ideas:
 - Program suggesting me to rest after I did four sets of the same thing in the same day.
 - Make the dic command not only show amount of poms but also time invested on each code/activity.
 - Single file (maybe txt file) that loads configurations for the program to work, like poms durations.
+- Loads too slow at the beggining.
