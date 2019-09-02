@@ -1,4 +1,5 @@
 import objectcreation as ob
+import gsheet
 import getData
 import time
 import vlc
@@ -35,14 +36,16 @@ def record(s,code):
     
 
 def to_do():
+
     OBJECTS = ob.createObjects()
+	
     """User interface and main inputs"""
     average = round((getData.totalTime()/60)/getData.sinceFirst(),3)
 
     print("\nYou have made",len(OBJECTS),"pomodoros, that is",int(getData.totalTime()/60),"hours or",getData.timeFormat(getData.totalTime()*60),"hours of productive, focused work. In average",str(getData.timeFormat(average*60*60))[7:],"hours per day in",getData.sinceFirst(),"days.\n")
     
     print("So, what the hell you want to do now, buddy?")
-    # res is short for response I think
+    #res is short for response I guess.
     res = input("1. Pomodoro. \n2. Short Break. \n3. Long Break.\n4. Quit.\n\n> ")
     if res == "1":
         ms.stop()
@@ -53,8 +56,13 @@ def to_do():
             print("You have worked on",code,"for",getData.timeFormat(getData.getPomTime(code)*60),"hours","("+str(len(getData.fromCode(code)))," pomodoros or",int(getData.getPomTime(code)/60),"total hours). "+"The last time you worked on",code,"was in",getData.pomLastTime(code).date,"or",getData.longAgo(code),"days ago.","\n")
         else:
             print("This is your first time working on",code)
-        countDown(1200)
-        record(do,code)
+        if countDown(1200):
+            try:
+                record(do,code)
+                sheetThread = threading.Thread(target=gsheet.updatePoms, args=(ob.createObjects(),))
+                sheetThread.start()
+            except:
+                pass
     elif res == "2":
         ms.stop()
         countDown(300)
@@ -67,6 +75,10 @@ def to_do():
         s = data.sort_freq(data.count_keyword(res,dic=True))
         for i,e in s:
             print(i,e)
-        
-while True:
-    to_do()
+
+
+if __name__=="__main__":
+    while True:
+        os.system("cls")
+        to_do()
+    
