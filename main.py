@@ -1,18 +1,20 @@
-import objectcreation as ob
-import gsheet
-import getData
-import time
-import vlc
 import os
+import time
 
-ms = vlc.MediaPlayer("c:/Users/Pc/Desktop/Daniel/Música/Asap Rocky- Ms ft Lil Wayne.mp3")
+import getData
+import gsheet
+import objectcreation as ob
+import vlc
 
-global filepath
-filepath = os.getcwd()+"\\"
+currentPath = os.getcwd()+"\\"
+ms = vlc.MediaPlayer(currentPath+"song.mp3")
+ms.play()
+global currentPath
+
 
 def countDown(secs):
-    """counts from secs to cero one at a time
-takes int"""
+    """Counts from secs to cero one at a time
+takes : int"""
     for i in range(secs,0,-1):
         minutes = int(i/60)
         seconds = (i%60)
@@ -29,7 +31,7 @@ def record(s,code):
     date = time.strftime("%d/%m/%Y")
     separation = ";"
 
-    f = open(filepath+"tomato_history.csv","a")
+    f = open(currentPath+"tomato_history.csv","a")
     f.write("\n"+hour+separation+date+separation+description+separation+code+separation+str(pomsDuration))
     f.close
     
@@ -74,4 +76,3 @@ if __name__=="__main__":
     while True:
         os.system("cls")
         to_do()
-    
