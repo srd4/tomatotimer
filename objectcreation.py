@@ -6,10 +6,8 @@ class pom:
         self.code = t[3]
         self.duration = t[4]
 
-
-
 def getFile():
-    """returns list of all lines of poms in history file"""
+    """Returns list of all lines of poms in history file."""
     with open("tomato_history.csv","r") as file:
         data = file.readlines()
         t = []
@@ -20,7 +18,7 @@ def getFile():
         return t
 
 def createObjects():
-    """makes pom objects"""
+    """Crates pom objects."""
     t = getFile()
     obs = []
 
