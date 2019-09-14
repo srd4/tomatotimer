@@ -6,10 +6,9 @@ import gsheet
 import objectcreation as ob
 import vlc
 
+global currentPath
 currentPath = os.getcwd()+"\\"
 ms = vlc.MediaPlayer(currentPath+"song.mp3")
-ms.play()
-global currentPath
 
 
 def countDown(secs):
