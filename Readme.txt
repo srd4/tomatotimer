@@ -19,3 +19,7 @@ Ideas:
 - Make the dic command not only show amount of poms but also time invested on each code/activity.
 - Single file (maybe txt file) that loads configurations for the program to work, like poms durations.
 - Loads too slow at the beggining.
+- Average from last week.
+- I have to graph the times of the day I have done pomodoros the most, they're probably when productivity is at my maximum.
+
+
