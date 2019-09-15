@@ -1,4 +1,4 @@
-from objectcreation import *
+from objectcreation import OBJECTS
 import matplotlib.pyplot as plt
 from getData import *
 import numpy as np
@@ -155,6 +155,25 @@ takes: list (of codes)"""
 
     plotThem(ts,codes)
 
+def getPomTimes():
+    """Returns list of moments in which poms were registered."""
+    t = []
+    for i in OBJECTS:
+        t.append(i.time)
+
+    return t
+
+def histTimes():
+    """Counts how many poms have been done on each hour of the day."""
+    d = dict()
+    for i in getPomTimes():
+        d[i[:2]] = d.get(i[:2],0)+1
+
+    return d
+        
+        
+
+        
 
 
 
