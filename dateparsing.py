@@ -130,7 +130,7 @@ takes dict()"""
 
 
     plt.grid()
-    plt.plot(x,y)
+    plt.bar(x,y)
     plt.show()
 
 def plotPoms(codes):
