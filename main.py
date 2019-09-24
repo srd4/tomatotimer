@@ -1,4 +1,5 @@
 import objectcreation as ob
+import threading
 import getData
 import gsheet
 import time
@@ -59,7 +60,7 @@ def to_do():
         if countDown(1200):
             try:
                 record(do,code)
-                sheetThread = threading.Thread(target=gsheet.updatePoms, args=(ob.createObjects(),))
+                sheetThread = threading.Thread(target=gsheet.updatePoms, args=(ob.OBJECTS,))
                 sheetThread.start()
             except:
                 pass
