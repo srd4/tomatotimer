@@ -5,6 +5,7 @@
 - dateparsing has functions for working with, modify, edit, load and plot dates of pom objects.
 - getData has different functions for obtaining certain quantities and values of the script
 - gsheet now updates tomatohistory file on a only spread sheet saved in my google account in drive.
+- Make the program tell me how much work on each thing have I done today, so I can switch and activity and be productive in multiple n the same day, this way I don't renegate so many.
 
 Ideas:
 - Date reports about:
@@ -21,6 +22,3 @@ Ideas:
 - Loads too slow at the beggining.
 - Average from last week.
 - I have to graph the times of the day I have done pomodoros the most, they're probably when productivity is at my maximum.
-- Make the program tell me how much work on each thing have I done today, so I can switch and activity and be productive in multiple n the same day, this way I don't renegate so many.
-
-
