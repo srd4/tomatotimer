@@ -1,11 +1,11 @@
 import objectcreation as ob
+import dateparsing as dp
 import threading
 import getData
 import gsheet
 import time
 import vlc
 import os
-
 
 
 global currentPath
@@ -22,32 +22,43 @@ takes : int"""
         print("%02d:%02d"%(minutes,seconds),end="\r")
         time.sleep(1)
     ms.play()
-    return 1
+    return True
 
 def record(s,code):
-    """appends pom in file"""
-    pomsDuration = 20
-    description = s
-    hour = time.strftime("%H:%M:%S")
-    date = time.strftime("%d/%m/%Y")
-    separation = ";"
-
+    """Appends pom in file"""
+    t = [time.strftime("%H:%M:%S"),time.strftime("%d/%m/%Y"),s,code,"20"]
+    
     f = open(currentPath+"tomato_history.csv","a")
-    f.write("\n"+hour+separation+date+separation+description+separation+code+separation+str(pomsDuration))
+    text = "\n"
+    
+    for i in t:
+        if i != t[-1]:
+            text += i+";"
+        else:
+            text += i
+            
+    f.write(text)
     f.close
     
 
 def to_do():
 
-    OBJECTS = ob.createObjects()
+    dbase = ob.dataBase()
+    OBJECTS = dbase.obs
+
 	
     """User interface and main inputs"""
     average = round((getData.totalTime()/60)/getData.sinceFirst(),3)
 
-    print("\nYou have made",len(OBJECTS),"pomodoros, that is",int(getData.totalTime()/60),"hours or",getData.timeFormat(getData.totalTime()*60),"hours of productive, focused work. In average",str(getData.timeFormat(average*60*60))[7:],"hours per day in",getData.sinceFirst(),"days.\n")
+    print("\nYou have made",len(OBJECTS),"pomodoros, that is",int(getData.totalTime()/60),"hours or",getData.timeFormat(getData.totalTime()*60),"hours of productive, focused work. Your average this week is",getData.weekAverage(),"hours a day. And started",getData.sinceFirst(),"days ago.\n")
+
+    done = getData.pomsToday()
+    print("\nToday you have done:",done,"\n")
+
+    
     
     print("So, what the hell you want to do now, buddy?")
-    #res is short for response.
+    #Response.
     res = input("1. Pomodoro. \n2. Short Break. \n3. Long Break.\n4. Quit.\n\n> ")
     if res == "1":
         ms.stop()
@@ -72,6 +83,10 @@ def to_do():
         countDown(600)
     elif res == "4":
         quit()
+    elif res == "plotWeek":
+        dp.plotIt(getData.getWeekPoms())
+    elif res == "plotToday":
+        dp.plotIt(getData.pomsToday())
 
 if __name__=="__main__":
     while True:
